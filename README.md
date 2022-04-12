@@ -113,3 +113,13 @@ kubectl expose deployment < your-deployment-name> --type=LoadBalancer --port=80 
 
 kubectl scale deployment < your-deployment-name> --replicas=3
 ```
+
+## AKS Pods and Deployments using declarative method
+* Add deployment.yaml -- Generate the YAML file using K8s extention
+* Add service.yaml -- Generate the YAML file using K8s extention
+* Apply the above desired state:
+```
+kubectl apply -f deployment.yaml
+kubectl apply -f service.yaml
+```
+

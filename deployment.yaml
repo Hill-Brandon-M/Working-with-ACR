@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sidapp01
+spec:
+  selector:
+    matchLabels:
+      app: sidapp01-pod
+  template:
+    metadata:
+      labels:
+        app: sidapp01-pod
+    spec:
+      containers:
+      - name: sidapp01-container
+        image: bcglabacr01.azurecr.io/workingwithacr:v1
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80

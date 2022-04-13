@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: sidapp01
+  name: brandon01
 spec:
   selector:
     matchLabels:
-      app: sidapp01-pod
+      app: brandon01-pod
   template:
     metadata:
       labels:
-        app: sidapp01-pod
+        app: brandon01-pod
     spec:
       containers:
-      - name: sidapp01-container
+      - name: brandon01-container
         image: bcglabacr01.azurecr.io/workingwithacr:v2
         resources:
           limits:

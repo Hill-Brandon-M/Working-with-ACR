@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: sidapp01-svc
+  name: brandon01-svc
 spec:
   selector:
-    app: sidapp01-pod
+    app: brandon01-pod
   ports:
   - port: 80
     targetPort: 80

@@ -34,17 +34,17 @@ spec:
             requests:
               cpu: {{ .Values.resources.requests.cpu }}
               memory: {{ .Values.resources.requests.memory }}
-          volumeMounts:
-          - name: log-volume
-            mountPath: /opt/apps/{{ .Values.app.name }}/logs
+          # volumeMounts:
+          # - name: log-volume
+          #   mountPath: /opt/apps/{{ .Values.app.name }}/logs
           # - name: config-volume
           #   mountPath: /script/start.sh
           #   subPath: start.sh
 
-      volumes:
-      - name: log-volume
-        persistentVolumeClaim:
-          claimName: {{ .Values.pvc.name }}
+      # volumes:
+      # - name: log-volume
+      #   persistentVolumeClaim:
+      #     claimName: {{ .Values.pvc.name }}
       # - name: config-volume
       #   configMap:
       #     name: {{ .Values.app.name }}-configmap

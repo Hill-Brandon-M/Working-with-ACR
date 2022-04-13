@@ -80,10 +80,10 @@ jobs:
       run : export HELM_EXPERIMENTAL_OCI=1  
       
     - name: Helm Chart Pull
-      run: helm chart pull bcglabacr01.azurecr.io/charts-actiondemo01-api:latest
+      run: helm pull bcglabacr01.azurecr.io/charts-actiondemo01-api:latest
 
     - name: Helm Chart Move
-      run: helm chart export bcglabacr01.azurecr.io/charts-actiondemo01-api:latest --destination ./install
+      run: helm export bcglabacr01.azurecr.io/charts-actiondemo01-api:latest --destination ./install
 
     - name: Helm Chart Install
       run: helm upgrade --namespace ns-qa --install --set image.tag=latest actiondemo01-api ./install/actiondemo01-api # release name chart name

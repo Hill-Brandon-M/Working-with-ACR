@@ -44,14 +44,14 @@ jobs:
         echo $ | helm registry login bcglabacr01.azurecr.io --username bcglabacr01 --password vQign8/X5HO3XhfXFWFW05CtHqpYV+dM
 
     - name: Package the helm chart
-      run: helm package ./helm/actiondemo01-api
+      run: helm package ./helm/brandondemo01-api
 
     - name: save helm chart to local registry
       run: |
-       helm chart save ./actiondemo01-api-0.1.0.tgz bcglabacr01.azurecr.io/charts-actiondemo01-api:latest
+       helm chart save ./brandondemo01-api-0.1.0.tgz bcglabacr01.azurecr.io/charts-brandondemo01-api:latest
 
     - name: Helm chart Push
-      run: helm chart push bcglabacr01.azurecr.io/charts-actiondemo01-api:latest
+      run: helm chart push bcglabacr01.azurecr.io/charts-brandondemo01-api:latest
   
   # deploy:
   #   runs-on: ubuntu-latest

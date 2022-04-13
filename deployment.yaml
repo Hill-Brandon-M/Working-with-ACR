@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: sidapp01-container
-        image: bcglabacr01.azurecr.io/workingwithacr:v1
+        image: bcglabacr01.azurecr.io/workingwithacr:v2
         resources:
           limits:
             memory: "128Mi"

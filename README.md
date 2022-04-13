@@ -123,3 +123,30 @@ kubectl apply -f deployment.yaml
 kubectl apply -f service.yaml
 ```
 
+## Add support for deploying into AKS
+* Copy the contents of the Kubeconfig and create a repositary secret in GitHub - KUBECONFIG:
+```
+az aks get-credentials --resource-group VMware-RG --name vmwareaks01 -f kubeconfig-ss
+```
+
+* Add new stage to docker-image.yml:
+```
+deploy:
+    runs-on: ubuntu-latest
+    needs: build_push_image # Will wait for the execution of the previous job 
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Kubernetes set context
+      uses: Azure/k8s-set-context@v1
+      with:
+        kubeconfig: ${{secrets.KUBECONFIG}} # Grab the auth token from GitHub secrets
+      id: login
+
+    #Declarative Deployment-02
+    - name: Kubernetes Deployment
+      run: kubectl apply -f deployment.yaml
+    - name: Service Deployment
+      run: kubectl apply -f service.yaml
+```

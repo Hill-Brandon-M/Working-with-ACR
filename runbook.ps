@@ -1,0 +1,41 @@
+//set environment variable HEL_EXPERIMENTAL_OCI to run helm chart & registry commands
+setx HELM_EXPERIMENTAL_OCI "1" /M
+or
+export HELM_EXPERIMENTAL_OCI=1
+
+
+//package helm chart
+helm package <path of helm chart>
+helm package ./helm/actiondemo01-api
+
+
+//acr login through helm
+helm registry login <acr server name>
+helm registry login bcglabacr01.azurecr.io
+
+
+//tag helm chart with acr name
+helm chart save <helm package tgz file path> <acr login server name / chart name>
+helm chart save ./actiondemo01-api-0.1.0.tgz bcglabacr01.azurecr.io/charts-actiondemo01-api:latest
+
+// For Helm versions 3.7 and above
+helm push <helm package tgz file path> oci://bcglabacr01.azurecr.io/helm
+
+
+//push helm chart to acr - only for versions below 3.7
+helm chart push <tagged helm chart name>
+helm chart push bcglabacr01.azurecr.io/charts-actiondemo01-api:latest
+
+
+
+
+//helm install or upgrade
+helm upgrade --namespace <ns-name> --install --set image.tag=<img-tag> <release-name> <chart-name>
+helm upgrade --namespace ns-qa --install --set image.tag=latest actiondemo01-api actiondemo01-api
+
+
+
+az aks update -n sidlab02 -g Barclays-02-RG --attach-acr bcglabacr01
+
+helm rollback -n ns-qa actiondemo01-api 2
+helm status actiondemo01-api -n ns-qa

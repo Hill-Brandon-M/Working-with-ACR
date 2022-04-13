@@ -2,7 +2,7 @@ replicaCount: 2
 k8s:
   namespace: "default"
 app:
-  name: "actiondemo01-api"
+  name: "brandondemo01-api"
 service:
   port: "5000"
 metrics:
@@ -14,9 +14,9 @@ memory:
   target: "413Mi"
   #This is 85% of the memory limit set.
 pv:
-  name: "actiondemo01sc"
+  name: "brandondemo01sc"
 pvc:
-  name: "actiondemo01pvc"
+  name: "brandondemo01pvc"
 
 image:
   repository: "bcglabacr01.azurecr.io/workingwithacr"

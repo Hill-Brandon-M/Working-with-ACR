@@ -72,6 +72,12 @@ jobs:
     # - name: Service Deployment
     #   run: kubectl apply -f service.yaml
 
+    - name: Helm tool installer
+      uses: Azure/setup-helm@v1
+      with:
+        # Version of helm
+        version: 3.3.1
+
     - name: Login to ACR using HELM
       run: |
         echo $ | helm registry login bcglabacr01.azurecr.io --username bcglabacr01 --password vQign8/X5HO3XhfXFWFW05CtHqpYV+dM
@@ -80,10 +86,10 @@ jobs:
       run : export HELM_EXPERIMENTAL_OCI=1  
       
     - name: Helm Chart Pull
-      run: helm pull bcglabacr01.azurecr.io/charts-actiondemo01-api:latest
+      run: helm chart pull bcglabacr01.azurecr.io/charts-actiondemo01-api:latest
 
     - name: Helm Chart Move
-      run: helm export bcglabacr01.azurecr.io/charts-actiondemo01-api:latest --destination ./install
+      run: helm chart export bcglabacr01.azurecr.io/charts-actiondemo01-api:latest --destination ./install
 
     - name: Helm Chart Install
       run: helm upgrade --namespace ns-qa --install --set image.tag=latest actiondemo01-api ./install/actiondemo01-api # release name chart name

@@ -80,16 +80,16 @@ jobs:
 
     - name: Login to ACR using HELM
       run: |
-        echo $ | helm registry login bcglabacr01.azurecr.io --username bcglabacr01 --password vQign8/X5HO3XhfXFWFW05CtHqpYV+dM
+        echo $ | helm registry login bcglabacr01.azurecr.io --username ${{secrets.ACR_USER}} --password ${{secrets.ACR_PASS}}
 
     - name : Set Helm Env Var
       run : export HELM_EXPERIMENTAL_OCI=1  
       
     - name: Helm Chart Pull
-      run: helm chart pull bcglabacr01.azurecr.io/charts-actiondemo01-api:latest
+      run: helm chart pull bcglabacr01.azurecr.io/charts-brandondemo01-api:latest
 
     - name: Helm Chart Move
-      run: helm chart export bcglabacr01.azurecr.io/charts-actiondemo01-api:latest --destination ./install
+      run: helm chart export bcglabacr01.azurecr.io/charts-brandondemo01-api:latest --destination ./install
 
     - name: Helm Chart Install
-      run: helm upgrade --namespace ns-qa --install --set image.tag=latest actiondemo01-api ./install/actiondemo01-api # release name chart name
+      run: helm upgrade --namespace ns-qa --install --set image.tag=latest brandondemo01-api ./install/brandondemo01-api # release name chart name
